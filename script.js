@@ -56,6 +56,7 @@ function removeTask(element) {
 }
 
 // --------------------- LocalStorge
+//Items in Storage eingügen
 function saveTodosToLocal(text) {
   let todos;
   if (localStorage.getItem("todos") === null) {
