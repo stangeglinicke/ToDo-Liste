@@ -59,3 +59,11 @@ function getTodosFromLocal() {
     updateItemCount(1);
   });
 }
+//übrige items left count
+function updateItemCount(num) {
+  if (num === 1) {
+    itemsLeft.innerText++;
+  } else if (num === -1) {
+    itemsLeft.innerText--;
+  }
+}
