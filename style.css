@@ -1,0 +1,108 @@
+/*Themen Header */
+header {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.container {
+  min-width: 700px;
+  width: 100%;
+  padding-left: 31%;
+  padding-right: 31%;
+}
+
+.todo-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--heading-clr);
+  letter-spacing: 15px;
+}
+
+.theme-toggle-btn #theme {
+  display: none;
+}
+
+body {
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-color: var(--bg-clr);
+  font-family: var(--ff-josefin);
+  font-size: 18px;
+}
+/*Abstände zurücksetzen*/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
+/* Container und Boxen zurücksetzen */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.dark-mode {
+  --bright-blue: hsl(220, 98%, 61%);
+  --bg-todo: hsl(235, 24%, 19%);
+  --bg-clr: hsl(235, 21%, 11%);
+  --font-clr: hsl(234, 39%, 85%);
+  --heading-clr: hsl(236, 33%, 92%);
+  --font-clr-hover: hsl(236, 33%, 92%);
+  --font-clr-sec: hsl(234, 11%, 52%);
+  --very-dark-blue: hsl(233, 14%, 35%);
+  --very-dark-grayish-blue: hsl(237, 14%, 26%);
+  --bottom-buttons-clr: hsl(233, 14%, 35%);
+  --shadow-clr: rgb(18, 17, 17);
+  --bg-image: url("./images/bg-desktop-dark.jpg");
+}
+
+.light-mode {
+  --bright-blue: hsl(220, 98%, 61%);
+  --bg-todo: hsl(0, 0%, 100%);
+  --very-dark-blue: hsl(233, 11%, 84%);
+  --heading-clr: hsl(0, 0%, 98%);
+  --font-clr: hsl(236, 6%, 46%);
+  --font-clr-hover: hsl(236, 13%, 45%);
+  --bottom-buttons-clr: hsl(229, 7%, 70%);
+  --shadow-clr: rgb(214, 207, 220);
+  --bg-clr: hsl(0, 0%, 98%);
+  --font-clr-sec: hsl(236, 33%, 92%);
+  --bg-image: url("./images/bg-desktop-light.jpg");
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*rows definiert*/
+.flex-row {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: space-between;
+}
+.theme-toggle-btn #theme + label::before {
+  content: "";
+  background: url(./images/icon-sun.svg);
+  display: block;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.theme-toggle-btn #theme:checked + label::before {
+  background: url(./images/icon-moon.svg);
+}
+
+header {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
