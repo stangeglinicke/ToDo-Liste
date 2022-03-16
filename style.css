@@ -152,6 +152,16 @@ header {
   align-items: center;
   overflow-wrap: anywhere;
 }
+.checkmark {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--very-dark-blue);
+  margin-left: 25px;
+  margin-right: 25px;
+  flex-shrink: 0;
+}
 .todo-container input[type="checkbox"]:hover ~ .checkmark {
   border-radius: 50%;
   border: double 1.8px transparent;
