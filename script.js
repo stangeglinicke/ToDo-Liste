@@ -32,13 +32,41 @@ function changeTheme() {
     : "dark-mode";
 }
 
-//remove task
+// Items hinzufügen
+function addTask(text) {
+  const elem = document.createElement("div");
+  elem.classList.add("todo-container", "draggable");
+  elem.setAttribute("draggable", "true");
+  elem.innerHTML = `<label> <input type="checkbox"/>
+                        <span class="checkmark"></span>
+                        <span class="text">${text}</span></label> 
+                        <button class="remove-todo-item"></button>`;
+
+  todoList.append(elem);
+
+  saveTodosToLocal(text);
+  updateItemCount(1);
+}
+
+//items entfernen
 function removeTask(element) {
   removeFromLocal(element);
   element.remove();
   updateItemCount(-1);
 }
-//get & render todos from localstorage
+
+// --------------------- LocalStorge
+function saveTodosToLocal(text) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(text);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+//Items suchen und anzeigen aus Localstorage
 function getTodosFromLocal() {
   let todos;
   if (localStorage.getItem("todos") === null) {
@@ -59,7 +87,20 @@ function getTodosFromLocal() {
     updateItemCount(1);
   });
 }
-//übrige items left count
+//Items aus Sorage löschen
+function removeFromLocal(element) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  const elemTobeRemoved = element.children[0].children[2].innerText;
+  todos.splice(todos.indexOf(elemTobeRemoved), 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+//-------------------------------
+//übrige items zählen
 function updateItemCount(num) {
   if (num === 1) {
     itemsLeft.innerText++;
