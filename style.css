@@ -295,3 +295,20 @@ header {
   margin-top: 4em;
   color: var(--very-dark-blue);
 }
+.clear-completed {
+  cursor: pointer;
+}
+
+.clear-completed:hover {
+  color: var(--font-clr-hover);
+}
+
+.box-shadow {
+  box-shadow: 0 16px 30px 1px var(--shadow-clr);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.todo-container button {
+  display: none;
+}
