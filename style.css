@@ -253,6 +253,40 @@ header {
 .theme-toggle-btn #theme {
   display: none;
 }
+
+/*FILTERS */
+.bottom-btns {
+  height: 64px;
+  width: 100%;
+  background-color: var(--bg-todo);
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--bottom-buttons-clr);
+  padding: 20px 20px 20px 27px;
+}
+.filters {
+  font-weight: 700;
+}
+.filters input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.filters label {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.filters label:hover {
+  color: var(--font-clr-hover);
+}
+.filters input[type="radio"]:checked ~ span {
+  color: var(--bright-blue);
+}
+
 /* drag and drop für HTML */
 .drag-to-reorder {
   display: flex;
