@@ -1,4 +1,4 @@
-//SELECT DOM ELEMENT
+//SELECT  ELEMENT
 const theme = document.querySelector("#theme");
 const inputText = document.querySelector("#input-task");
 const todoList = document.querySelector(".todolist-container");
@@ -9,13 +9,14 @@ const clearCompleted = document.querySelector(".clear-completed");
 document.addEventListener("DOMContentLoaded", getTodosFromLocal);
 theme.addEventListener("click", changeTheme);
 
+//addTask Eventlistener
 inputText.addEventListener("keypress", (e) => {
   if (e.charCode === 13 && inputText.value.length > 0) {
     addTask(inputText.value);
     inputText.value = "";
   }
 });
-
+//removeTask Eventlistener
 todoList.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-todo-item")) {
     removeTask(event.target.parentElement);
@@ -24,7 +25,6 @@ todoList.addEventListener("click", (event) => {
 
 clearCompleted.addEventListener("click", removeAllCompleted);
 
-//FUNCTIONS
 //change theme
 function changeTheme() {
   document.querySelector("body").classList = theme.checked
