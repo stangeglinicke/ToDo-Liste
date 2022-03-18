@@ -55,6 +55,15 @@ function removeTask(element) {
   updateItemCount(-1);
 }
 
+//-------------------------------
+//übrige items zählen
+function updateItemCount(num) {
+  if (num === 1) {
+    itemsLeft.innerText++;
+  } else if (num === -1) {
+    itemsLeft.innerText--;
+  }
+}
 // --------------------- LocalStorge
 //Items in Storage eingügen
 function saveTodosToLocal(text) {
@@ -99,13 +108,4 @@ function removeFromLocal(element) {
   const elemTobeRemoved = element.children[0].children[2].innerText;
   todos.splice(todos.indexOf(elemTobeRemoved), 1);
   localStorage.setItem("todos", JSON.stringify(todos));
-}
-//-------------------------------
-//übrige items zählen
-function updateItemCount(num) {
-  if (num === 1) {
-    itemsLeft.innerText++;
-  } else if (num === -1) {
-    itemsLeft.innerText--;
-  }
 }
