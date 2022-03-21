@@ -201,10 +201,6 @@ header {
 .todo-container button {
   display: none;
 }
-.todo-container:hover button {
-  display: inline;
-  cursor: pointer;
-}
 
 .todo-container label {
   cursor: pointer;
@@ -285,6 +281,12 @@ header {
 }
 .filters input[type="radio"]:checked ~ span {
   color: var(--bright-blue);
+}
+.clear-completed {
+  cursor: pointer;
+}
+.clear-completed:hover {
+  color: var(--font-clr-hover);
 }
 
 /* drag and drop für HTML */

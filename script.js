@@ -109,3 +109,10 @@ function removeFromLocal(element) {
   todos.splice(todos.indexOf(elemTobeRemoved), 1);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
+//FILTERS
+document.querySelectorAll(".filters input").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    console.log(e.target.id);
+    filterTodoList(e.target.id);
+  });
+});
