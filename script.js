@@ -1,4 +1,3 @@
-//SELECT  ELEMENT
 const theme = document.querySelector("#theme");
 const inputText = document.querySelector("#input-task");
 const todoList = document.querySelector(".todolist-container");
@@ -9,14 +8,13 @@ const clearCompleted = document.querySelector(".clear-completed");
 document.addEventListener("DOMContentLoaded", getTodosFromLocal);
 theme.addEventListener("click", changeTheme);
 
-//addTask Eventlistener
 inputText.addEventListener("keypress", (e) => {
   if (e.charCode === 13 && inputText.value.length > 0) {
     addTask(inputText.value);
     inputText.value = "";
   }
 });
-//removeTask Eventlistener
+
 todoList.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-todo-item")) {
     removeTask(event.target.parentElement);
@@ -25,6 +23,7 @@ todoList.addEventListener("click", (event) => {
 
 clearCompleted.addEventListener("click", removeAllCompleted);
 
+//FUNCTIONS
 //change theme
 function changeTheme() {
   document.querySelector("body").classList = theme.checked
@@ -32,15 +31,15 @@ function changeTheme() {
     : "dark-mode";
 }
 
-// Items hinzufügen
+//add task
 function addTask(text) {
   const elem = document.createElement("div");
   elem.classList.add("todo-container", "draggable");
   elem.setAttribute("draggable", "true");
   elem.innerHTML = `<label> <input type="checkbox"/>
-                        <span class="checkmark"></span>
-                        <span class="text">${text}</span></label> 
-                        <button class="remove-todo-item"></button>`;
+                    <span class="checkmark"></span>
+                    <span class="text">${text}</span></label> 
+                    <button class="remove-todo-item"></button>`;
 
   todoList.append(elem);
 
@@ -48,15 +47,14 @@ function addTask(text) {
   updateItemCount(1);
 }
 
-//items entfernen
+//remove task
 function removeTask(element) {
   removeFromLocal(element);
   element.remove();
   updateItemCount(-1);
 }
 
-//-------------------------------
-//übrige items zählen
+//calculate items left count
 function updateItemCount(num) {
   if (num === 1) {
     itemsLeft.innerText++;
@@ -64,19 +62,54 @@ function updateItemCount(num) {
     itemsLeft.innerText--;
   }
 }
-// --------------------- LocalStorge
-//Items in Storage eingügen
-function saveTodosToLocal(text) {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
+
+//filter list
+document.querySelectorAll(".filters input").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    console.log(e.target.id);
+    filterTodoList(e.target.id);
+  });
+});
+
+function filterTodoList(id) {
+  const list = document.querySelectorAll(".todo-container");
+  switch (id) {
+    case "all":
+      list.forEach((item) => {
+        item.classList.remove("hidden");
+      });
+      break;
+    case "active":
+      list.forEach((item) => {
+        if (item.querySelector("input").checked) {
+          item.classList.add("hidden");
+        } else {
+          item.classList.remove("hidden");
+        }
+      });
+      break;
+    case "completed":
+      list.forEach((item) => {
+        if (!item.querySelector("input").checked) {
+          item.classList.add("hidden");
+        } else {
+          item.classList.remove("hidden");
+        }
+      });
+      break;
   }
-  todos.push(text);
-  localStorage.setItem("todos", JSON.stringify(todos));
 }
-//Items suchen und anzeigen aus Localstorage
+
+//clear all completed tasks
+function removeAllCompleted() {
+  document
+    .querySelectorAll('.todo-container input[type="checkbox"]:checked')
+    .forEach((item) => {
+      removeTask(item.closest("div"));
+    });
+}
+
+//get & render todos from localstorage
 function getTodosFromLocal() {
   let todos;
   if (localStorage.getItem("todos") === null) {
@@ -97,7 +130,18 @@ function getTodosFromLocal() {
     updateItemCount(1);
   });
 }
-//Items aus Sorage löschen
+
+function saveTodosToLocal(text) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(text);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 function removeFromLocal(element) {
   let todos;
   if (localStorage.getItem("todos") === null) {
@@ -109,10 +153,9 @@ function removeFromLocal(element) {
   todos.splice(todos.indexOf(elemTobeRemoved), 1);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
-//FILTERS
-document.querySelectorAll(".filters input").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    console.log(e.target.id);
-    filterTodoList(e.target.id);
-  });
+
+// Drag & Drop to reorder list
+let dragbox = document.querySelector(".todolist-container");
+new Sortable(dragbox, {
+  animation: 400,
 });

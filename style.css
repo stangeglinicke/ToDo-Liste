@@ -1,47 +1,3 @@
-/*Themen Header */
-header {
-  padding-top: 80px;
-  padding-bottom: 40px;
-}
-
-.container {
-  min-width: 700px;
-  width: 100%;
-  padding-left: 31%;
-  padding-right: 31%;
-}
-
-.theme-toggle-btn #theme {
-  display: none;
-}
-
-body {
-  background-image: var(--bg-image);
-  background-repeat: no-repeat;
-  background-color: var(--bg-clr);
-  font-family: var(--ff-josefin);
-  font-size: 18px;
-}
-/*Abstände zurücksetzen*/
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-figure,
-picture {
-  margin: 0;
-}
-
-/* Container und Boxen zurücksetzen */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 .dark-mode {
   --bright-blue: hsl(220, 98%, 61%);
   --bg-todo: hsl(235, 24%, 19%);
@@ -70,23 +26,60 @@ picture {
   --font-clr-sec: hsl(236, 33%, 92%);
   --bg-image: url("./images/bg-desktop-light.jpg");
 }
+
+:root {
+  --ff-josefin: "Josefin Sans", sans-serif;
+}
+
+/* Box sizing RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
 input,
 button,
 textarea,
 select {
   font: inherit;
 }
-/*rows definiert*/
+
 .flex-row {
   display: flex;
   flex-direction: row nowrap;
   justify-content: space-between;
 }
 
+body {
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-color: var(--bg-clr);
+  font-family: var(--ff-josefin);
+  font-size: 18px;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+/*---------------------HEADER & THEME-------------------------------*/
 header {
   padding-top: 80px;
   padding-bottom: 40px;
 }
+
 .container {
   min-width: 700px;
   width: 100%;
@@ -94,20 +87,43 @@ header {
   padding-right: 31%;
 }
 
-.hidden {
+.todo-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--heading-clr);
+  letter-spacing: 15px;
+}
+
+.theme-toggle-btn #theme {
   display: none;
 }
 
-/*adds inputs */
+.theme-toggle-btn #theme + label::before {
+  content: "";
+  background: url(./images/icon-sun.svg);
+  display: block;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.theme-toggle-btn #theme:checked + label::before {
+  background: url(./images/icon-moon.svg);
+}
+
+/*---------------------INPUT TASK CONTAINER-------------------------*/
 .input-container {
   height: 64px;
   width: 100%;
   border-radius: 6px;
   background-color: var(--bg-todo);
   margin: 0 0 25px;
+  /* padding: 0 26px; */
+  /* position: relative; */
   display: flex;
   align-items: center;
 }
+
 .for-circle::before {
   content: "";
   width: 25px;
@@ -118,6 +134,7 @@ header {
   margin-right: 25px;
   display: flex;
 }
+
 #input-task {
   background: transparent;
   outline: none;
@@ -130,11 +147,19 @@ header {
   color: var(--font-clr);
   letter-spacing: -0.3px;
 }
+
 ::placeholder {
   color: var(--very-dark-blue);
   opacity: 0.8;
 }
-/*---------------------------------------------------------------- TODO CONTAINER */
+
+/*---------------------TODO CONTAINER-------------------------------*/
+.box-shadow {
+  box-shadow: 0px 16px 30px 1px var(--shadow-clr);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .todo-container {
   height: 64px;
   width: 100%;
@@ -146,60 +171,13 @@ header {
   align-items: center;
   overflow-wrap: anywhere;
 }
-.checkmark {
-  content: "";
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid var(--very-dark-blue);
-  margin-left: 25px;
-  margin-right: 25px;
-  flex-shrink: 0;
-}
-.todo-container input[type="checkbox"]:hover ~ .checkmark {
-  border-radius: 50%;
-  border: double 1.8px transparent;
-  background-image: linear-gradient(var(--bg-todo), var(--bg-todo)),
-    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-}
-.todo-container input[type="checkbox"]:checked ~ .checkmark {
-  border: none;
-  background: center url(./images/icon-check.svg) no-repeat,
-    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-}
-.todo-container input[type="checkbox"]:checked ~ .text {
-  text-decoration: line-through;
-  color: var(--very-dark-blue);
-}
-.todo-container input[type="checkbox"]:hover ~ .checkmark {
-  border-radius: 50%;
-  border: double 1.8px transparent;
-  background-image: linear-gradient(var(--bg-todo), var(--bg-todo)),
-    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-}
-
-.todo-container input[type="checkbox"]:checked ~ .checkmark {
-  border: none;
-  background: center url(./images/icon-check.svg) no-repeat,
-    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-}
-
-.todo-container input[type="checkbox"]:checked ~ .text {
-  text-decoration: line-through;
-  color: var(--very-dark-blue);
-}
-.box-shadow {
-  box-shadow: 0px 16px 30px 1px var(--shadow-clr);
-  border-radius: 6px;
-  overflow: hidden;
-}
 
 .todo-container button {
   display: none;
+}
+.todo-container:hover button {
+  display: inline;
+  cursor: pointer;
 }
 
 .todo-container label {
@@ -215,6 +193,38 @@ header {
   position: absolute;
 }
 
+.checkmark {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--very-dark-blue);
+  margin-left: 25px;
+  margin-right: 25px;
+  flex-shrink: 0;
+}
+
+/* Gradient border of checkmark on hover */
+.todo-container input[type="checkbox"]:hover ~ .checkmark {
+  border-radius: 50%;
+  border: double 1.8px transparent;
+  background-image: linear-gradient(var(--bg-todo), var(--bg-todo)),
+    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.todo-container input[type="checkbox"]:checked ~ .checkmark {
+  border: none;
+  background: center url(./images/icon-check.svg) no-repeat,
+    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.todo-container input[type="checkbox"]:checked ~ .text {
+  text-decoration: line-through;
+  color: var(--very-dark-blue);
+}
+
 .remove-todo-item {
   width: 18px;
   height: 18px;
@@ -227,33 +237,13 @@ header {
   color: var(--very-dark-blue);
 }
 
-/*change theme button*/
-.theme-toggle-btn #theme + label::before {
-  content: "";
-  background: url(./images/icon-sun.svg);
-  display: block;
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
-}
-.theme-toggle-btn #theme:checked + label::before {
-  background: url(./images/icon-moon.svg);
-}
-
-.todo-heading {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--heading-clr);
-  letter-spacing: 15px;
-}
-.theme-toggle-btn #theme {
-  display: none;
-}
-
-/*FILTERS */
+/*---------------------BOTTOM BUTTONS-------------------------------*/
 .bottom-btns {
   height: 64px;
   width: 100%;
+  /* border-radius: 5px; */
+  /* border-top-right-radius: 0%; */
+  /* border-top-left-radius: 0%; */
   background-color: var(--bg-todo);
   display: flex;
   align-items: center;
@@ -282,35 +272,24 @@ header {
 .filters input[type="radio"]:checked ~ span {
   color: var(--bright-blue);
 }
+
 .clear-completed {
   cursor: pointer;
 }
+
 .clear-completed:hover {
   color: var(--font-clr-hover);
 }
 
-/* drag and drop für HTML */
+.hidden {
+  display: none;
+}
+
+/* drag and drop */
 .drag-to-reorder {
   display: flex;
   justify-content: center;
   font-size: 12px;
   margin-top: 4em;
   color: var(--very-dark-blue);
-}
-.clear-completed {
-  cursor: pointer;
-}
-
-.clear-completed:hover {
-  color: var(--font-clr-hover);
-}
-
-.box-shadow {
-  box-shadow: 0 16px 30px 1px var(--shadow-clr);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.todo-container button {
-  display: none;
 }
