@@ -23,7 +23,6 @@ todoList.addEventListener("click", (event) => {
 
 clearCompleted.addEventListener("click", removeAllCompleted);
 
-//FUNCTIONS
 //change theme
 function changeTheme() {
   document.querySelector("body").classList = theme.checked
@@ -154,8 +153,26 @@ function removeFromLocal(element) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// Drag & Drop to reorder list
-let dragbox = document.querySelector(".todolist-container");
-new Sortable(dragbox, {
-  animation: 400,
-});
+//Zusatz
+
+if (
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+  saveThemeToLocalStorage("darkmode");
+} else {
+  document.querySelector("body").classList.add("light-mode");
+  document.querySelector("body").classList.remove("dark-mode");
+  saveThemeToLocalStorage("lightmode");
+}
+
+function saveThemeToLocalStorage(modetheme) {
+  if (localStorage.getItem("modetheme") === null) {
+    modetheme = modetheme;
+  } else {
+    modetheme = JSON.parse(localStorage.getItem("modetheme"));
+  }
+  localStorage.setItem("modetheme", JSON.stringify(modetheme));
+}
+
+//FUNKTION ONLOAD DAMIT STORAGE gelesen wird!
